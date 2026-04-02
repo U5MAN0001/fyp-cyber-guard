@@ -16,7 +16,7 @@ def load_engine():
         data = joblib.load('cyberguard_model.pkl')
         return data['model'], data['encoders'], data['features']
     except Exception as e:
-        st.error("⚠️ Backend Engine Missing! Run 'train_model.py' first.")
+        st.error("Backend Engine Missing! Run 'train_model.py' first.")
         return None, None, None
 
 model, encoders, feature_names = load_engine()
@@ -24,7 +24,7 @@ model, encoders, feature_names = load_engine()
 # --- LLM INCIDENT RESPONSE FUNCTION ---
 def generate_mitigation(traffic_details):
     if GROQ_API_KEY == "YAHAN_APNI_GROQ_KEY_PASTE_KARO":
-        return "⚠️ Please add your Groq API key in app.py to enable AI automated responses."
+        return "Please add your Groq API key in app.py to enable AI automated responses."
     
     try:
         client = Groq(api_key=GROQ_API_KEY)
@@ -49,7 +49,7 @@ st.title("🛡️ CyberGuard: AI Network Threat Analyzer")
 st.markdown("Monitor real-time network packets and detect anomalies using Machine Learning.")
 
 if model:
-    st.sidebar.header("📡 Live Traffic Input")
+    st.sidebar.header("Live Traffic Input")
     st.sidebar.markdown("Simulate incoming network packets:")
     
     # User Inputs for the 6 features
@@ -60,7 +60,7 @@ if model:
     failed_logins = st.sidebar.number_input("Failed Logins", min_value=0, value=0)
     count = st.sidebar.number_input("Connection Count (Same Host)", min_value=0, value=2)
 
-    if st.sidebar.button("🔍 Analyze Packet", use_container_width=True):
+    if st.sidebar.button("Analyze Packet", use_container_width=True):
         
         # Prepare data for prediction
         input_data = pd.DataFrame([[duration, protocol, src_bytes, dst_bytes, failed_logins, count]], 
@@ -74,13 +74,13 @@ if model:
             
         st.markdown("---")
         if prediction == 'normal':
-            st.success("✅ **STATUS: SECURE** - No malicious activity detected in this packet.")
+            st.success("**STATUS: SECURE** - No malicious activity detected in this packet.")
         else:
             st.error("🚨 **CRITICAL ALERT: NETWORK ANOMALY DETECTED!**")
             
             traffic_summary = f"Protocol: {protocol}, Failed Logins: {failed_logins}, Data: {src_bytes}B"
             
-            st.warning("🤖 Generating AI Incident Response...")
+            st.warning("Generating AI Incident Response...")
             mitigation_plan = generate_mitigation(traffic_summary)
             
             st.info(f"### Mitigation Strategy\n{mitigation_plan}")
