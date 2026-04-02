@@ -82,4 +82,4 @@ if model:
             st.error(f"Encoding Error: {e}. Please retrain your model with the latest train_model.py.")
 
 st.markdown("---")
-st.caption("Developed for BS Data Science FYP | Powered by Scikit-Learn & Llama-3.1")
+st.caption("Developed for Muhammad Usman Murtaza FYP | Powered by Scikit-Learn & Llama-3.1")
