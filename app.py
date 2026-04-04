@@ -60,7 +60,7 @@ if model:
             with st.spinner("Scanning traffic signatures..."):
                 
                 # =========================================================
-                # 🚀 HYBRID IDS LOGIC: SOC Whitelisting (Rule-Based Engine)
+                # HYBRID IDS LOGIC: SOC Whitelisting (Rule-Based Engine)
                 # =========================================================
                 # Agar connection bilkul normal hai (0 failed logins, standard bytes) toh rule-based engine isay safe declare karega.
                 is_whitelisted = False
@@ -77,10 +77,10 @@ if model:
 
             st.markdown("---")
             if clean_prediction == 'normal':
-                st.success("✅ STATUS: SECURE - No malicious activity detected in this packet.")
-                st.info("🛡️ **SOC Note:** Traffic cleared by Hybrid IDS Engine (Standard Baseline Match).")
+                st.success("STATUS: SECURE - No malicious activity detected in this packet.")
+                st.info("**SOC Note:** Traffic cleared by Hybrid IDS Engine (Standard Baseline Match).")
             else:
-                st.error("🚨 CRITICAL ALERT: NETWORK ANOMALY DETECTED!")
+                st.error("CRITICAL ALERT: NETWORK ANOMALY DETECTED!")
                 
                 traffic_info = f"Protocol: {protocol}, Failed Logins: {failed_logins}, Duration: {duration}s"
                 st.warning("Compiling AI-generated response plan...")
